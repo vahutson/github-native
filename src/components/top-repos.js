@@ -1,25 +1,31 @@
 import React from 'react';
-import { View, Image, Text } from 'react-native';
-import styles from '../styles';
+import { View, Image, Text, TouchableHighlight } from 'react-native';
+import styles from '../styles'
 
 
 export default class List extends React.Component {
+    constructor() {
+        super();
+    }
+
     render() {
         let rows = [];
         if (this.props.dataReady) {
             this.props.data.map(function (item, key) {
                 rows.push(
-                    <View key={key} style={styles.listItem}>
-                        <Text style={{marginLeft: 5, marginRight: 5}}>{key+1}</Text>
+                    <TouchableHighlight key={key + 'key'} style={styles.listItemTouch} onPress={() => alert(item.owner.login) }>
+                    <View style={styles.listItemView}>
+                        <Text style={{width: 30, textAlign: 'center'}}>{key+1}</Text>
                         <Image style={styles.imageHolder} source={{uri: item.owner.avatar_url}}/>
                         <Text style={styles.textB}>User: {item.owner.login}</Text>
                         <Text style={styles.textB}>Repo: {item.name}</Text>
                     </View>
+                    </TouchableHighlight>
 
                 )
             });
         } else {
-            rows.push(<Text style={styles.textA}>Loading...</Text>)
+            rows.push(<Text key='loading' style={styles.textA}>Loading...</Text>)
         }
 
         return (
@@ -27,3 +33,4 @@ export default class List extends React.Component {
         )
     }
 }
+

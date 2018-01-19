@@ -1,5 +1,5 @@
 import React from 'react';
-import StyleSheet from 'react-native'
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
@@ -20,11 +20,8 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     imageHolder: {
-        width: 50,
-        height: 50,
-        borderWidth: .5,
-        borderColor: '#000',
-        borderRadius: 100,
+        width: 55,
+        height: 55,
     },
     textA: {
         color: '#FFF',
@@ -37,10 +34,8 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     listHolder: {
-        width: '90%',
-        backgroundColor: '#b6deff',
-        borderRadius: 5,
-        overflow: 'scroll'
+        width: '100%',
+        backgroundColor: '#000000',
     },
     listHolderContent: {
         alignItems: 'center',
@@ -49,15 +44,17 @@ const styles = StyleSheet.create({
     check: {
         backgroundColor: '#000'
     },
-    listItem: {
+    listItemTouch: {
+        width: 355,
+        borderBottomWidth: .3,
+        borderColor: '#000',
+        backgroundColor: '#ffffff',
+    },
+    listItemView: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        width: 300,
-        margin: 5,
-        backgroundColor: '#ffffff',
         justifyContent: 'flex-start',
-        borderRadius: 5,
     }
 });
 
