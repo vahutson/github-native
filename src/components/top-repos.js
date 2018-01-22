@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, TouchableHighlight, ScrollView, TextInput } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from '../styles'
 
@@ -64,15 +64,19 @@ export default class List extends React.Component {
         if (this.state.dataReady) {
             this.state.data.map(function (item, key) {
                 rows.push(
-                    <TouchableHighlight key={key + 'key'} style={styles.listItemTouch} onPress={() => Actions.Repo({url: item.url})}>
+                    <TouchableOpacity key={key + 'key'} style={styles.listItemTouch}
+                                        onPress={() => Actions.Repo({url: item.url})}>
                         <View style={styles.listItemView}>
-                            <Text style={{width: 30, textAlign: 'center'}}>{key + 1}</Text>
-                            <Image style={styles.imageHolder} source={{uri: item.owner.avatar_url}}/>
-                            <Text style={styles.textB}>User: {item.owner.login}</Text>
-                            <Text style={styles.textB}>Repo: {item.name}</Text>
+                            <View style={styles.listItemViewUser}>
+                                <Text style={styles.numberList}>{key + 1}</Text>
+                                <Image style={styles.imageHolder} source={{uri: item.owner.avatar_url}}/>
+                                <Text style={styles.textB}>{item.owner.login}</Text>
+                            </View>
+                            <View style={styles.listItemViewRepo}>
+                                <Text style={styles.textB}>{item.name}</Text>
+                            </View>
                         </View>
-                    </TouchableHighlight>
-
+                    </TouchableOpacity>
                 )
             });
         } else {
@@ -84,6 +88,10 @@ export default class List extends React.Component {
                 <TextInput style={styles.input} underlineColorAndroid={'transparent'}
                     onChangeText={(text) => this.filterList(text)}
                            placeholder={'Search'}/>
+                <View style={styles.tableHeader}>
+                    <View style={styles.tableHeaderItem}><Text style={styles.centerText}>User</Text></View>
+                    <View style={styles.tableHeaderItem}><Text style={styles.centerText}>Repo</Text></View>
+                </View>
                 <ScrollView contentContainerStyle={styles.listHolderContent} style={styles.listHolder}>
                     <View>{rows}</View>
                 </ScrollView>

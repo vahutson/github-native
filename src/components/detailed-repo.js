@@ -38,13 +38,22 @@ export default class Repo extends React.Component {
                 <Text style={{color: 'blue', marginBottom: 20, textAlign: 'center'}} onPress={() => Linking.openURL(this.state.dataRepo.html_url)}>{this.state.dataRepo.html_url}</Text>
                 <Text style={styles.repoDescription}>{this.state.dataRepo.description}</Text>
                 <View style={styles.repoInfoCont}>
-                        <View><Image source={require('../image/star.png')} style={styles.repoInfoIcon}/><Text>{this.state.dataRepo.stargazers_count}</Text></View>
-                        <View><Image source={require('../image/eye.png')} style={styles.repoInfoIcon}/><Text>{this.state.dataRepo.watchers_count}</Text></View>
-                        <View><Image source={require('../image/bug.png')} style={styles.repoInfoIcon}/><Text>{this.state.dataRepo.open_issues_count}</Text></View>
+                        <View>
+                            <Image source={require('../image/star.png')} style={styles.repoInfoIcon}/>
+                            <Text style={styles.counter}>{this.state.dataRepo.stargazers_count}</Text>
+                        </View>
+                        <View>
+                            <Image source={require('../image/eye.png')} style={styles.repoInfoIcon}/>
+                            <Text style={styles.counter}>{this.state.dataRepo.watchers_count}</Text>
+                        </View>
+                        <View>
+                            <Image source={require('../image/bug.png')} style={styles.repoInfoIcon}/>
+                            <Text style={styles.counter}>{this.state.dataRepo.open_issues_count}</Text>
+                        </View>
                     </View>
                 </View>
         } else {
-           repo = <Text>Loading...</Text>
+            repo = <View style={styles.repoContainer}><Text style={styles.textA}>Loading...</Text></View>
         }
         return (
             repo
