@@ -1,68 +1,15 @@
 import React from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import styles from '../styles'
+import styles from '../styles';
 
-
-export default class List extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            dataFiltered: [],
-            dataReady: false,
-            searchText: '',
-            searchData: []
-        };
-        this.loadAPI.bind(this);
-        this.filterList.bind(this)
-    }
-
-    loadAPI () {
-        fetch('https://api.github.com/repositories')
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({
-                    data: data,
-                    dataFiltered: data,
-                    dataReady: true
-                });
-            })
-            .catch((err) => console.log(err))
-    }
-
-    filterList (text) {
-        this.setState({
-            data: this.state.dataFiltered
-        });
-        this.setState({
-            data: this.state.dataFiltered.filter(function (item) {
-                return item.name.match(text)
-            })
-        })
-    }
-
-    getSearchData () {
-        fetch('https://api.github.com/repositories')
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({
-                    data: data,
-                    dataFiltered: data,
-                    dataReady: true
-                });
-            })
-            .catch((err) => console.log(err))
-    }
-
-    componentWillMount () {
-        this.loadAPI()
-    }
+class List extends React.Component {
 
     render() {
         let rows = [];
-        if (this.state.dataReady) {
-            this.state.data.map(function (item, key) {
+        if (this.props.dataReady) {
+            this.props.data.map(function (item, key) {
                 rows.push(
                     <TouchableOpacity key={key + 'key'} style={styles.listItemTouch}
                                         onPress={() => Actions.Repo({url: item.url})}>
@@ -86,7 +33,7 @@ export default class List extends React.Component {
         return (
             <View style={styles.container}>
                 <TextInput style={styles.input} underlineColorAndroid={'transparent'}
-                    onChangeText={(text) => this.filterList(text)}
+                    // onChangeText={(text) => this.filterList(text)}
                            placeholder={'Search'}/>
                 <View style={styles.tableHeader}>
                     <View style={styles.tableHeaderItem}><Text style={styles.centerText}>User</Text></View>
@@ -96,7 +43,16 @@ export default class List extends React.Component {
                     <View>{rows}</View>
                 </ScrollView>
             </View>
-        )
+        );
     }
 }
 
+function mapStateToProps (state) {
+    return {
+        data: state.data,
+        dataReady: state.dataReady,
+        dataFiltered: state.dataFiltered
+    }
+}
+
+export default connect(mapStateToProps)(List)
