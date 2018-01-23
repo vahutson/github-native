@@ -11,7 +11,6 @@ export function getList (data) {
 export function listReady () {
     return {
         type: types.LIST_READY,
-        dataReady: true
     }
 }
 
@@ -20,5 +19,12 @@ export function filterList (data, dataFiltered) {
         type: types.FILTER_LIST,
         data: data,
         dataFiltered: dataFiltered
+    }
+}
+
+export function getPulls (data) {
+    return {
+        type: types.GET_PULLS,
+        pullsData: data,
     }
 }

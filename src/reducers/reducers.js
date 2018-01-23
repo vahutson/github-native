@@ -5,6 +5,8 @@ const initialState =
         data: [],
         dataFiltered: [],
         dataReady: false,
+        pullsData: [],
+        pullsReady: false
     };
 
 export default function gitReduce (state = initialState, action) {
@@ -20,7 +22,7 @@ export default function gitReduce (state = initialState, action) {
         case types.LIST_READY:
             return {
                 ...state,
-                dataReady: action.dataReady
+                dataReady: true
             };
 
         case types.FILTER_LIST:
@@ -35,6 +37,13 @@ export default function gitReduce (state = initialState, action) {
                     return item.name.match(text)
                 })
             };
+
+        case types.GET_PULLS:
+            return {
+                ...state,
+                pullsData: action.pullsData,
+                pullsReady: true
+            }
         default:
             return state;
     }

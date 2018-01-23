@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
         width: '50%'
     },
     imageHolder: {
-        width: 50,
-        height: 50,
+        width: 55,
+        height: 55,
         borderRadius: 100
     },
     textA: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 50,
+        height: 55,
     },
     listItemViewUser: {
         flex: 1,
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         padding: 50,
+        paddingTop: 20
     },
     repoUserPic: {
         width: 100,
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-        marginTop: 30
+        margin: 20
     },
     repoInfoIcon: {
         width: 30,
@@ -129,6 +130,11 @@ const styles = StyleSheet.create({
         borderWidth: .5,
         borderColor: '#000000',
         borderRadius: 100
+    },
+    pullsContainer: {},
+    pullsInfo: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 });
 

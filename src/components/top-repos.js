@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { getList, filterList } from '../actions/actions'
+import { getList, filterList } from '../actions/actions';
 import styles from '../styles';
 
 const mapDispatchToProps = {
@@ -13,7 +13,7 @@ const mapDispatchToProps = {
 class List extends React.Component {
 
     searchRepo(text) {
-        fetch(`https://api.github.com/search/repositories?q=${text}&sort=stars&page=1&per_page=100`)
+        fetch(`https://api.github.com/search/repositories?q=${text}&sort=stars&page=1&per_page=10`)
             .then((res) => res.json())
             .then((data) => {
                 this.props.getList(data.items);
@@ -27,16 +27,7 @@ class List extends React.Component {
             this.props.data.map(function (item, key) {
                 rows.push(
                     <TouchableOpacity key={key + 'key'} style={styles.listItemTouch}
-                                        onPress={() => Actions.Repo({
-                                            url: item.html_url,
-                                            name: item.name,
-                                            login: item.owner.login,
-                                            avatar: item.owner.avatar_url,
-                                            description: item.description,
-                                            stars: item.stargazers_count,
-                                            watchers: item.watchers_count,
-                                            issues: item.open_issues_count
-                                        })}>
+                                        onPress={() => Actions.Repo({repoInfo: item})}>
                         <View style={styles.listItemView}>
                             <View style={styles.listItemViewUser}>
                                 <Text style={styles.numberList}>{key + 1}</Text>
