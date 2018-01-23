@@ -11,7 +11,7 @@ class Repo extends React.Component {
                     <Image source={{uri: this.props.avatar}} style={styles.repoUserPic}/>
                 <Text style={styles.repoUserName}>{this.props.login}</Text>
                 <Text style={styles.repoName}>{this.props.name}</Text>
-                <Text style={{color: 'blue', marginBottom: 20, textAlign: 'center'}} onPress={() => Linking.openURL(this.props.url)}>{this.props.html_url}</Text>
+                <Text style={{color: 'blue', marginBottom: 20, textAlign: 'center'}} onPress={() => Linking.openURL(this.props.url)}>{this.props.url}</Text>
                 <Text style={styles.repoDescription}>{this.props.description}</Text>
                 <View style={styles.repoInfoCont}>
                         <View>
