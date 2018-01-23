@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '100%',
-        padding: 2,
         fontSize: 15,
         color: '#7b7b7b',
         textAlign: 'center',
@@ -31,8 +30,8 @@ const styles = StyleSheet.create({
         width: '50%'
     },
     imageHolder: {
-        width: 55,
-        height: 55,
+        width: 50,
+        height: 50,
         borderRadius: 100
     },
     textA: {
@@ -64,6 +63,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        height: 50,
     },
     listItemViewUser: {
         flex: 1,
@@ -89,13 +89,13 @@ const styles = StyleSheet.create({
         borderRadius: 100
     },
     repoName: {
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: 'bold',
         margin: 10,
         textAlign: 'center'
     },
     repoUserName: {
-        fontSize: 20,
+        fontSize: 18,
         marginTop: 10,
         textAlign: 'center'
     },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-        marginTop: 130
+        marginTop: 30
     },
     repoInfoIcon: {
         width: 30,

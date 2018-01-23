@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Image, Text, Linking } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import { getRepo, repoToggleReady } from '../actions/actions';
+import { View, Image, Text, Linking, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import { getRepo, repoToggleReady } from '../actions/actions';
 import styles from '../styles'
 
 const mapDispatchToProps = {
@@ -28,7 +27,8 @@ class Repo extends React.Component {
     render() {
         let repo = '';
         if (this.props.repoReady) {
-            repo = <View style={styles.repoContainer}>
+            repo =
+                <View style={styles.repoContainer}>
                     <Image source={{uri: this.props.dataRepo.owner.avatar_url}} style={styles.repoUserPic}/>
                 <Text style={styles.repoUserName}>{this.props.dataRepo.owner.login}</Text>
                 <Text style={styles.repoName}>{this.props.dataRepo.name}</Text>
@@ -53,7 +53,7 @@ class Repo extends React.Component {
             repo = <View style={styles.repoContainer}><Text style={styles.textA}>Loading...</Text></View>
         }
         return (
-            repo
+            <ScrollView>{repo}</ScrollView>
         )
     }
 }

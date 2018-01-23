@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { filterList, repoToggleReady} from '../actions/actions'
+import { getList, filterList, repoToggleReady} from '../actions/actions'
 import styles from '../styles';
 
 const mapDispatchToProps = {
     filterList,
-    repoToggleReady
+    repoToggleReady,
+    getList
 };
 
 class List extends React.Component {
@@ -18,6 +19,15 @@ class List extends React.Component {
             return item.name.match(text)
         });
         this.props.filterList(newData, this.props.dataFiltered);
+    }
+
+    searchRepo(text) {
+        fetch(`https://api.github.com/search/repositories?q=${text}&sort=stars&page=1&per_page=100`)
+            .then((res) => res.json())
+            .then((data) => {
+                this.props.getList(data.items);
+            })
+            .catch((err) => alert(err));
     }
     componentWillMount () {
         this.props.repoToggleReady(false)
@@ -37,7 +47,7 @@ class List extends React.Component {
                                 <Text style={styles.textB}>{item.owner.login}</Text>
                             </View>
                             <View style={styles.listItemViewRepo}>
-                                <Text style={styles.textB}>{item.name}</Text>
+                                <Text numberOfLines={2} style={styles.textB}>{item.name}</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
@@ -50,7 +60,7 @@ class List extends React.Component {
         return (
             <View style={styles.container}>
                 <TextInput style={styles.input} underlineColorAndroid={'transparent'}
-                     onChangeText={(text) => this.filterList(text)}
+                     onChangeText={(text) => this.searchRepo(text)}
                            placeholder={'Search'}/>
                 <View style={styles.tableHeader}>
                     <View style={styles.tableHeaderItem}><Text style={styles.centerText}>User</Text></View>
