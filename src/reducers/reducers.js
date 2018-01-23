@@ -5,10 +5,6 @@ const initialState =
         data: [],
         dataFiltered: [],
         dataReady: false,
-        searchText: '',
-        searchData: [],
-        dataRepo: [],
-        repoReady: false
     };
 
 export default function gitReduce (state = initialState, action) {
@@ -25,19 +21,6 @@ export default function gitReduce (state = initialState, action) {
             return {
                 ...state,
                 dataReady: action.dataReady
-            };
-
-        case types.GET_REPO:
-            return {
-                ...state,
-                dataRepo: action.dataRepo,
-                repoReady: action.repoReady
-            };
-
-        case types.REPO_READY:
-            return {
-                ...state,
-                repoReady: action.repoReady
             };
 
         case types.FILTER_LIST:

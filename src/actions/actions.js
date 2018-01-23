@@ -15,21 +15,6 @@ export function listReady () {
     }
 }
 
-export function getRepo (data) {
-    return {
-        type: types.GET_REPO,
-        dataRepo: data,
-        repoReady: true
-    }
-}
-
-export function repoToggleReady (bool) {
-    return {
-        type: types.REPO_READY,
-        repoReady: bool
-    }
-}
-
 export function filterList (data, dataFiltered) {
     return {
         type: types.FILTER_LIST,
