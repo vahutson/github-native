@@ -44,10 +44,11 @@ class List extends React.Component {
                             <View style={styles.listItemViewUser}>
                                 <Text style={styles.numberList}>{key + 1}</Text>
                                 <Image style={styles.imageHolder} source={{uri: item.owner.avatar_url}}/>
-                                <Text style={styles.textB}>{item.owner.login}</Text>
+                                <Text  numberOfLines={2} style={styles.textB}>{item.name}</Text>
                             </View>
                             <View style={styles.listItemViewRepo}>
-                                <Text numberOfLines={2} style={styles.textB}>{item.name}</Text>
+                                <Image style={styles.repoInfoIcon} source={require('../image/star.png')}/>
+                                <Text style={styles.textB}>{item.stargazers_count}</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
@@ -62,10 +63,6 @@ class List extends React.Component {
                 <TextInput style={styles.input} underlineColorAndroid={'transparent'}
                      onChangeText={(text) => this.searchRepo(text)}
                            placeholder={'Search'}/>
-                <View style={styles.tableHeader}>
-                    <View style={styles.tableHeaderItem}><Text style={styles.centerText}>User</Text></View>
-                    <View style={styles.tableHeaderItem}><Text style={styles.centerText}>Repo</Text></View>
-                </View>
                 <ScrollView contentContainerStyle={styles.listHolderContent} style={styles.listHolder}>
                     <View>{rows}</View>
                 </ScrollView>
