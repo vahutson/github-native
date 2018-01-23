@@ -11,7 +11,7 @@ const store = createStore(gitReduce);
 export default class App extends React.Component {
     constructor() {
         super();
-        this.loadAPI.bind(this)
+        this.loadAPI.bind(this);
     }
 
     loadAPI () {

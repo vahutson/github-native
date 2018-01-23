@@ -2,9 +2,26 @@ import React from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { filterList, repoToggleReady} from '../actions/actions'
 import styles from '../styles';
 
+const mapDispatchToProps = {
+    filterList,
+    repoToggleReady
+};
+
 class List extends React.Component {
+
+    filterList (text) {
+        this.props.filterList(this.props.dataFiltered, this.props.dataFiltered);
+        let newData = this.props.dataFiltered.filter(function (item) {
+            return item.name.match(text)
+        });
+        this.props.filterList(newData, this.props.dataFiltered);
+    }
+    componentWillMount () {
+        this.props.repoToggleReady(false)
+    }
 
     render() {
         let rows = [];
@@ -33,7 +50,7 @@ class List extends React.Component {
         return (
             <View style={styles.container}>
                 <TextInput style={styles.input} underlineColorAndroid={'transparent'}
-                    // onChangeText={(text) => this.filterList(text)}
+                     onChangeText={(text) => this.filterList(text)}
                            placeholder={'Search'}/>
                 <View style={styles.tableHeader}>
                     <View style={styles.tableHeaderItem}><Text style={styles.centerText}>User</Text></View>
@@ -55,4 +72,4 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps)(List)
+export default connect(mapStateToProps, mapDispatchToProps)(List)

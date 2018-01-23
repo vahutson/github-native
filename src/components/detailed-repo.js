@@ -1,32 +1,28 @@
 import React from 'react';
 import { View, Image, Text, Linking } from 'react-native';
-// import { bindActionCreators } from 'redux';
-import { getDetails, repoReady } from '../actions/actions';
+import { Actions } from 'react-native-router-flux';
+import { getRepo, repoToggleReady } from '../actions/actions';
 import { connect } from 'react-redux';
 import styles from '../styles'
 
 const mapDispatchToProps = {
-    getDetails,
-    repoReady
+    getRepo,
+    repoToggleReady
 };
 
 class Repo extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     loadRepo() {
         fetch(this.props.url)
             .then((res) => res.json())
             .then((data) =>
-                this.props.getDetails(data),
-                this.props.repoReady()
-            )
-            .catch((err) => console.log(err));
+                this.props.getRepo(data))
+            .catch((err) => alert(err));
     }
 
     componentWillMount () {
-        this.loadRepo()
+        this.props.repoToggleReady(false);
+        this.loadRepo();
     }
 
     render() {
