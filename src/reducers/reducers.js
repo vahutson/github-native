@@ -18,9 +18,21 @@ export default function gitReduce (state = initialState, action) {
             return {
                 ...state,
                 data: action.data,
-                dataFiltered: action.data,
+                dataFiltered: action.data
+            };
+
+        case types.LIST_READY:
+            return {
+                ...state,
                 dataReady: action.dataReady
             };
+
+        case types.REPO_READY:
+            return {
+                ...state,
+                repoReady: action.repoReady
+            };
+
 
         case types.GET_DETAILS:
             return {

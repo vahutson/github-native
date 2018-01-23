@@ -1,27 +1,28 @@
 import React from 'react';
 import { View, Image, Text, Linking } from 'react-native';
-import { bindActionCreators } from 'redux';
-import * as goActions from '../actions/actions';
+// import { bindActionCreators } from 'redux';
+import { getDetails, repoReady } from '../actions/actions';
 import { connect } from 'react-redux';
 import styles from '../styles'
 
+const mapDispatchToProps = {
+    getDetails,
+    repoReady
+};
 
 class Repo extends React.Component {
     constructor(props) {
         super(props);
-        this.loadRepo.bind(this);
-        this.getRepo.bind(this)
     }
 
-    getRepo = () => this.props.getRepo();
-
-    loadRepo () {
+    loadRepo() {
         fetch(this.props.url)
             .then((res) => res.json())
             .then((data) =>
-                // let action = goActions.getDetails(data);
-                // dispatch(action))
-            .catch((err) => console.log(err))
+                this.props.getDetails(data),
+                this.props.repoReady()
+            )
+            .catch((err) => console.log(err));
     }
 
     componentWillMount () {
@@ -68,11 +69,6 @@ function mapStateToProps (state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return({
-        getRepo: (data) => {dispatch(GET_DETAILS(data))}
-    })
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Repo)
 

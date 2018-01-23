@@ -5,7 +5,7 @@ import Repo from './src/components/detailed-repo';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import gitReduce from './src/reducers/reducers';
-import { getList } from './src/actions/actions';
+import { getList, listReady } from './src/actions/actions';
 const store = createStore(gitReduce);
 
 export default class App extends React.Component {
@@ -18,7 +18,8 @@ export default class App extends React.Component {
         fetch('https://api.github.com/repositories')
             .then((res) => res.json())
             .then((data) => {
-                store.dispatch(getList(data))
+                store.dispatch(getList(data));
+                store.dispatch(listReady())
             })
             .catch((err) => alert(err));
     }
