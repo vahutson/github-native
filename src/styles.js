@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     imageHolder: {
         width: 55,
         height: 55,
-        borderRadius: 100
     },
     textA: {
         color: '#000000',
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     listItemTouch: {
-        width: 355,
+        width: 350,
         borderBottomWidth: .3,
         borderColor: '#000',
         backgroundColor: '#ffffff',
@@ -70,6 +69,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        overflow: 'hidden'
     },
     listItemViewRepo: {
         flex: 1,
@@ -81,13 +81,11 @@ const styles = StyleSheet.create({
     repoContainer: {
         flex: 1,
         alignItems: 'center',
-        padding: 50,
-        paddingTop: 20
+        padding: 20
     },
     repoUserPic: {
         width: 100,
         height: 100,
-        borderRadius: 100
     },
     repoName: {
         fontSize: 25,
@@ -106,7 +104,7 @@ const styles = StyleSheet.create({
     repoInfoCont: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         width: '100%',
         margin: 20
     },

@@ -13,7 +13,13 @@ const mapDispatchToProps = {
 class List extends React.Component {
 
     searchRepo(text) {
-        fetch(`https://api.github.com/search/repositories?q=${text}&sort=stars&page=1&per_page=10`)
+        let searchText = '';
+        if(text) {
+            searchText = text;
+        } else {
+            searchText = 'all'
+        }
+        fetch(`https://api.github.com/search/repositories?q=${searchText}&sort=stars&page=1&per_page=20`)
             .then((res) => res.json())
             .then((data) => {
                 this.props.getList(data.items);
@@ -31,7 +37,7 @@ class List extends React.Component {
                         <View style={styles.listItemView}>
                             <View style={styles.listItemViewUser}>
                                 <Text style={styles.numberList}>{key + 1}</Text>
-                                <Image style={styles.imageHolder} source={{uri: item.owner.avatar_url}}/>
+                                <Image borderRadius={50} style={styles.imageHolder} source={{uri: item.owner.avatar_url}}/>
                                 <Text  numberOfLines={2} style={styles.textB}>{item.name}</Text>
                             </View>
                             <View style={styles.listItemViewRepo}>

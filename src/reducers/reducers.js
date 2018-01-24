@@ -43,7 +43,14 @@ export default function gitReduce (state = initialState, action) {
                 ...state,
                 pullsData: action.pullsData,
                 pullsReady: true
+            };
+
+        case types.REFRESH_PULLS: {
+            return {
+                ...state,
+                pullsReady: false
             }
+        }
         default:
             return state;
     }

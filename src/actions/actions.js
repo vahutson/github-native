@@ -28,3 +28,9 @@ export function getPulls (data) {
         pullsData: data,
     }
 }
+
+export function refreshPulls () {
+    return {
+        type: types.REFRESH_PULLS,
+    }
+}
