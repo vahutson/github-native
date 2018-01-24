@@ -17,7 +17,7 @@ class List extends React.Component {
         if(text) {
             searchText = text;
         } else {
-            searchText = 'all'
+            searchText = 'stars:>1'
         }
         fetch(`https://api.github.com/search/repositories?q=${searchText}&sort=stars&page=1&per_page=20`)
             .then((res) => res.json())
@@ -29,7 +29,7 @@ class List extends React.Component {
 
     render() {
         let rows = [];
-        if (this.props.dataReady) {
+        if (this.props.dataReady && Array.isArray(this.props.data)) {
             this.props.data.map(function (item, key) {
                 rows.push(
                     <TouchableOpacity key={key + 'key'} style={styles.listItemTouch}
@@ -48,6 +48,8 @@ class List extends React.Component {
                     </TouchableOpacity>
                 )
             });
+        } else if (this.props.dataReady && Array.isArray(this.props.data) === false){
+            rows.push(<Text key='loading' style={styles.textA}>No results</Text>)
         } else {
             rows.push(<Text key='loading' style={styles.textA}>Loading...</Text>)
         }

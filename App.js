@@ -16,7 +16,7 @@ export default class App extends React.Component {
     }
 
     loadAPI () {
-        fetch('https://api.github.com/search/repositories?q=all&sort=stars&page=1&per_page=20')
+        fetch('https://api.github.com/search/repositories?q=stars:>1&sort=stars&page=1&per_page=20')
             .then((res) => res.json())
             .then((data) => {
                 store.dispatch(getList(data.items));
