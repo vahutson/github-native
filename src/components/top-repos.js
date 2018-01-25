@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { getDataState } from '../selectors/index'
 import { getList, filterList } from '../actions/actions';
 import styles from '../styles';
 
@@ -22,14 +23,16 @@ class List extends React.Component {
         fetch(`https://api.github.com/search/repositories?q=${searchText}&sort=stars&page=1&per_page=20`)
             .then((res) => res.json())
             .then((data) => {
-                this.props.getList(data.items);
+            if (data.items || data.item.length === 0) {
+                this.props.getList(data.items)
+            }
             })
             .catch((err) => alert(err));
     }
 
     render() {
         let rows = [];
-        if (this.props.dataReady && Array.isArray(this.props.data)) {
+        if (this.props.dataReady && this.props.data.length > 0) {
             this.props.data.map(function (item, key) {
                 rows.push(
                     <TouchableOpacity key={key + 'key'} style={styles.listItemTouch}
@@ -48,7 +51,7 @@ class List extends React.Component {
                     </TouchableOpacity>
                 )
             });
-        } else if (this.props.dataReady && Array.isArray(this.props.data) === false){
+        } else if (this.props.dataReady && this.props.data.length === 0){
             rows.push(<Text key='loading' style={styles.textA}>No results</Text>)
         } else {
             rows.push(<Text key='loading' style={styles.textA}>Loading...</Text>)
@@ -67,12 +70,15 @@ class List extends React.Component {
     }
 }
 
-function mapStateToProps (state) {
-    return {
-        data: state.data,
-        dataReady: state.dataReady,
-        dataFiltered: state.dataFiltered
-    }
-}
+const makeMapStateToProps = () => {
+    const mapStateToProps = (state) => {
+        return {
+            data: getDataState(state),
+            dataReady: state.dataReady,
+            dataFiltered: state.dataFiltered
+        }
+    };
+    return mapStateToProps
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(List)
+export default connect(makeMapStateToProps, mapDispatchToProps)(List)

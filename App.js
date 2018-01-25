@@ -1,13 +1,18 @@
 import React from 'react';
 import { Router, Scene } from 'react-native-router-flux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import sagaRoot from './src/sagas/index'
 import gitReduce from './src/reducers/reducers';
 import { getList, listReady } from './src/actions/actions';
 import List from './src/components/top-repos';
 import Repo from './src/components/detailed-repo';
 
-const store = createStore(gitReduce);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(gitReduce, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(sagaRoot);
 
 export default class App extends React.Component {
     constructor() {
