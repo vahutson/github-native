@@ -37,10 +37,10 @@ export default class App extends React.Component {
   render() {
     return (
         <Provider store={store}>
-        <Router navigationBarStyle={{paddingTop: 20}} titleStyle={{position: 'absolute', left: 85, marginTop: 20}}>
+        <Router navigationBarStyle={{}} titleStyle={{lineHeight: 25, fontSize: 20}}>
             <Scene key='root'>
-                <Scene key='List' component={List} title='Top GitHub Repos' initial='true'/>
-                <Scene key='Repo' component={Repo} title='Repo'/>
+                <Scene key='List' component={List} titleStyle={{alignSelf: 'center'}} title='Top GitHub Repos' initial='true'/>
+                <Scene key='Repo' component={Repo} titleStyle={{alignSelf: 'center'}} title='Repo'/>
             </Scene>
         </Router>
         </Provider>

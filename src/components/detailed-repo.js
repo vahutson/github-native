@@ -27,7 +27,7 @@ class Repo extends React.Component {
 
     render() {
         let pulls = [];
-        if (this.props.pullsReady) {
+        if (this.props.pullsReady && Array.isArray(this.props.pullsData)) {
             this.props.pullsData.map(function(item, key) {
                 pulls.push(<View key={key + 'pull'} style={{padding: 5}}>
                     <View style={styles.pullsInfo}>
@@ -50,22 +50,22 @@ class Repo extends React.Component {
                       onPress={() => Linking.openURL(this.props.repoInfo.html_url)}>{this.props.repoInfo.html_url}</Text>
                 <Text style={styles.repoDescription}>{this.props.repoInfo.description}</Text>
                 <View style={styles.repoInfoCont}>
-                    <View>
+                    <View style={{alignItems: 'center'}}>
                         <Image source={require('../image/star.png')} style={styles.repoInfoIcon}/>
                         <Text style={styles.counter}>{this.props.repoInfo.stargazers_count}</Text>
                     </View>
-                    <View>
+                    <View style={{alignItems: 'center'}}>
                         <Image source={require('../image/eye.png')} style={styles.repoInfoIcon}/>
                         <Text style={styles.counter}>{this.props.repoInfo.watchers_count}</Text>
                     </View>
-                    <View>
+                    <View style={{alignItems: 'center'}}>
                         <Image source={require('../image/bug.png')} style={styles.repoInfoIcon}/>
                         <Text style={styles.counter}>{this.props.repoInfo.open_issues_count}</Text>
                     </View>
                 </View>
-                <View  style={{width: '100%'}}><Text style={{alignSelf: 'center', fontSize: 20}}>Last pull requests</Text>
+                <View  style={{width: '100%'}}><Text style={{alignSelf: 'center', fontSize: 20, marginBottom: 10}}>Last pull requests</Text>
                     <View style={{flexDirection: 'row', height: 30, justifyContent: 'space-between', backgroundColor: '#fff',
-                    borderWidth: .5, borderRadius: 5, padding: 5}}>
+                    borderWidth: .5, borderRadius: 5, marginBottom: 10, padding: 5}}>
                         <View style={{width: '25%'}}><Text style={{textAlign: 'center'}}>user</Text></View>
                         <View style={{width: '25%'}}><Text style={{textAlign: 'center'}}>name</Text></View>
                         <View style={{width: '25%'}}><Text style={{textAlign: 'center'}}>number</Text></View>

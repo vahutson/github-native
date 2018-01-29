@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView, TextInput} from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { getDataState } from '../selectors/index'
@@ -40,7 +40,9 @@ class List extends React.Component {
                         <View style={styles.listItemView}>
                             <View style={styles.listItemViewUser}>
                                 <Text style={styles.numberList}>{key + 1}</Text>
-                                <Image borderRadius={50} style={styles.imageHolder} source={{uri: item.owner.avatar_url}}/>
+                                <View borderRadius={50} style={{overflow: 'hidden'}}>
+                                <Image style={styles.imageHolder} source={{uri: item.owner.avatar_url}}/>
+                                </View>
                                 <Text  numberOfLines={2} style={styles.textB}>{item.name}</Text>
                             </View>
                             <View style={styles.listItemViewRepo}>

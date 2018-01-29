@@ -1,6 +1,9 @@
 import React from 'react';
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
+
+const { width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -11,6 +14,7 @@ const styles = StyleSheet.create({
     input: {
         width: '100%',
         fontSize: 15,
+        padding: 5,
         color: '#7b7b7b',
         textAlign: 'center',
         borderWidth: 1,
@@ -52,9 +56,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     listItemTouch: {
-        width: 350,
-        borderBottomWidth: .3,
-        borderColor: '#000',
+        width: width,
         backgroundColor: '#ffffff',
     },
     listItemView: {
@@ -125,11 +127,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 10,
         lineHeight: 16,
-        borderWidth: .5,
+        borderWidth: StyleSheet.hairlineWidth,
         borderColor: '#000000',
         borderRadius: 100
     },
-    pullsContainer: {},
     pullsInfo: {
         flexDirection: 'row',
         justifyContent: 'space-between'
